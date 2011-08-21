@@ -6,7 +6,7 @@ A python Google App Engine anonymous chat web app. This anonymous chat uses metr
 create better matches. The metrics will include: most used words, grammar quality, average word length, average time
 before disconnect. Users may register to build up stats and keep metrics for use on multiple devices.
 
-License
+The MIT License
 
 Copyright (c) 2011 Robert Ramsay
 
