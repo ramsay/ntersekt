@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not chat.finished %}
+{% if host %}
+<p>You are the host of this chat a guest will connect soon.</p>
+{% endif %}
+<p>Remember to play nice. If you offend the other person they may report you. And you may report them. You only get
+one report an hour.</p>
+{% endif %}
+<div class="chatbox">
+{% for line in chat.text) %}
+    <p><span class="{{line.split(':')[0]}}">{{line.split(':')[0]}}</span>{{line.split(':')[1]}}</p>
+</div>
+{% endfor %}
+{% if not chat.finished %}
+<a href="#"><div class="send"><span>Send</span></div></a><input type="text" />
+{% endif %}
+{% endblock %}
+
+{% block script_extra %}
+<script>
+
+</script>

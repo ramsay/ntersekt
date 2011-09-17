@@ -16,16 +16,35 @@
 #
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
+from google.appengine.ext.webapp import template
 
+class BaseHandler(webapp.RequestHandler):
+    ''' My custom base handler for simple request handlers. Implements a render method to simplify rendering webapp
+    templates.
+    '''
+    def render(self, template_path, args):
+        '''Uses webapp.template to render the template at template_path using the args dict to fill in the template
+        variables.
+        '''
+        self.response.out.write(
+            template.render(template_path, args)
+        )
 
-class MainHandler(webapp.RequestHandler):
+from chat import ChatHandler
+
+class MainHandler(BaseHandler):
+    '''The simple index page for ntersekt. Gives a short explanation of the website and has options to start new chats
+    regular and NSFW.
+    '''
     def get(self):
-        self.response.out.write('Hello world!')
+        self.render("templates/index.html", {'page_title': "Welcome"})
 
 
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
-                                         debug=True)
+    application = webapp.WSGIApplication(
+        [('/', MainHandler),
+         ('/chat', ChatHandler)],
+        debug=True)
     util.run_wsgi_app(application)
 
 
